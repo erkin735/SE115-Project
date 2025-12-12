@@ -27,34 +27,27 @@ public class Main {
                 while ((line = br.readLine()) != null) {
                     String[] p = line.trim().split(",");
                     int day = Integer.parseInt(p[0].trim()) - 1;
-                    String comm = p[1].trim();
-                    comm = comm.trim();
+                    String comm = p[1];
                     int profit = Integer.parseInt(p[2].trim());
+
                     int idx = -1;
                     for (int i = 0; i < COMMS; i++) {
-                        if (commodities[i].equalsIgnoreCase(comm.trim())) {
+                        if (commodities[i].equals(comm)) {
                             idx = i;
                             break;
                         }
                     }
                     if (idx == -1) continue;
                     profitData[m][day][idx] = profit;
-
                 }
-
-            br.close();
-        } catch (Exception e) {
+                br.close();
+            } catch (Exception e) {
             }
         }
     }
 
-
-
-
-
-
     public static String mostProfitableCommodityInMonth(int month) {
-        if (month < 1 || month > 12) return "Invalid";
+        if (month < 1 || month > 12) return "INVALID_MONTH";
 
         int m = month - 1;
         int[] totals = new int[COMMS];
@@ -67,16 +60,17 @@ public class Main {
 
         int maxIndex = 0;
         for (int i = 1; i < COMMS; i++) {
-            if (totals[i] > totals[maxIndex]) maxIndex = i;
+            if (totals[i] > totals[maxIndex]) {
+                maxIndex = i;
+            }
         }
 
         return commodities[maxIndex];
     }
 
-
     public static int totalProfitOnDay(int month, int day) {
-        if (month < 1 || month > 12) return -1;
-        if (day < 1 || day > 28) return -1;
+        if (month < 1 || month > 12) return -99999;
+        if (day < 1 || day > 28) return -99999;
 
         int m = month - 1;
         int d = day - 1;
@@ -90,8 +84,27 @@ public class Main {
 
 
     public static int commodityProfitInRange(String commodity, int from, int to) {
-        return 1234;
+        if (from < 1 || to > 28 || from > to) return -99999;
+
+        int idx = -1;
+        for (int i = 0; i < COMMS; i++) {
+            if (commodities[i].equals(commodity)) {
+                idx = i;
+                break;
+            }
+        }
+        if (idx == -1) return -1;
+
+        int total = 0;
+        for (int m = 0; m < MONTHS; m++) {
+            for (int d = from - 1; d <= to - 1; d++) {
+                total += profitData[m][d][idx];
+            }
+        }
+        return total;
     }
+
+
 
     public static int bestDayOfMonth(int month) {
         return 1234;
