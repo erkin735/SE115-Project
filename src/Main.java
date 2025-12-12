@@ -13,8 +13,9 @@ public class Main {
 
     public static void main(String[] args) {
         loadData();
-        System.out.println("Data loaded – ready for queries");
+
     }
+
 
     public static void loadData() {
         for (int m = 0; m < MONTHS; m++) {
@@ -22,28 +23,33 @@ public class Main {
             try {
                 BufferedReader br = new BufferedReader(new FileReader(fileName));
                 String line;
+                line = br.readLine();
                 while ((line = br.readLine()) != null) {
-                    String[] p = line.split(",");
-                    int day = Integer.parseInt(p[0]) - 1;
-                    String comm = p[1];
-                    int profit = Integer.parseInt(p[2]);
-
+                    String[] p = line.trim().split(",");
+                    int day = Integer.parseInt(p[0].trim()) - 1;
+                    String comm = p[1].trim();
+                    comm = comm.trim();
+                    int profit = Integer.parseInt(p[2].trim());
                     int idx = -1;
                     for (int i = 0; i < COMMS; i++) {
-                        if (commodities[i].equals(comm)) {
+                        if (commodities[i].equalsIgnoreCase(comm.trim())) {
                             idx = i;
                             break;
                         }
                     }
                     if (idx == -1) continue;
-
                     profitData[m][day][idx] = profit;
+
                 }
-                br.close();
-            } catch (Exception e) {
+
+            br.close();
+        } catch (Exception e) {
             }
         }
     }
+
+
+
 
 
 
@@ -69,8 +75,19 @@ public class Main {
 
 
     public static int totalProfitOnDay(int month, int day) {
-        return 1234;
+        if (month < 1 || month > 12) return -1;
+        if (day < 1 || day > 28) return -1;
+
+        int m = month - 1;
+        int d = day - 1;
+
+        int total = 0;
+        for (int c = 0; c < COMMS; c++) {
+            total += profitData[m][d][c];
+        }
+        return total;
     }
+
 
     public static int commodityProfitInRange(String commodity, int from, int to) {
         return 1234;
