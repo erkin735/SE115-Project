@@ -13,9 +13,8 @@ public class Main {
 
     public static void main(String[] args) {
         loadData();
-        {
-                }
-            }
+        }
+
     public static void loadData() {
         for (int m = 0; m < MONTHS; m++) {
             String fileName = "Data_Files/" + months[m] + ".txt";
@@ -118,8 +117,29 @@ public class Main {
     }
 
     public static String bestMonthForCommodity(String comm) {
-        return "DUMMY";
-    }
+            int idx = -1;
+            for (int i = 0; i < COMMS; i++) {
+                if (commodities[i].equalsIgnoreCase(comm)) {
+                    idx = i;
+                    break;
+                }
+            }
+            if (idx == -1) return "INVALID_COMMODITY";
+            int maxProfit = Integer.MIN_VALUE;
+            int bestMonth = -1;
+            for (int m = 0; m < MONTHS; m++) {
+                int totalProfit = 0;
+                for (int d = 0; d < DAYS; d++) {
+                    totalProfit += profitData[m][d][idx];
+                }
+                if (totalProfit > maxProfit) {
+                    maxProfit = totalProfit;
+                    bestMonth = m;
+                }
+            }
+
+            return months[bestMonth];
+        }
 
     public static int consecutiveLossDays(String comm) {
         return 1234;
