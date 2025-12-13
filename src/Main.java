@@ -13,7 +13,7 @@ public class Main {
 
     public static void main(String[] args) {
         loadData();
-        }
+    }
 
     public static void loadData() {
         for (int m = 0; m < MONTHS; m++) {
@@ -42,7 +42,6 @@ public class Main {
             }
         }
     }
-
     public static String mostProfitableCommodityInMonth(int month) {
         if (month < 1 || month > 12) return "INVALID_MONTH";
 
@@ -137,12 +136,36 @@ public class Main {
                     bestMonth = m;
                 }
             }
-
             return months[bestMonth];
         }
 
     public static int consecutiveLossDays(String comm) {
-        return 1234;
+        int commIndex = -1;
+        for (int i = 0; i < COMMS; i++) {
+            if (commodities[i].equals(comm)) {
+                commIndex = i;
+                break;
+            }
+    }
+        if (commIndex == -1) {
+            return -1;
+        }
+
+        int normalStreak = 0;
+        int maxStreak = 0;
+        for (int m = 0; m < MONTHS; m++) {
+            for (int d = 0; d < DAYS; d++) {
+                if (profitData[m][d][commIndex] < 0) {
+                    normalStreak++;
+                    if (normalStreak > maxStreak) {
+                        maxStreak = normalStreak;
+                    }
+                } else {
+                    normalStreak = 0;
+                }
+            }
+        }
+        return maxStreak;
     }
 
     public static int daysAboveThreshold(String comm, int threshold) {
