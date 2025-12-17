@@ -194,26 +194,26 @@ public class Main {
     }
 
     public static int biggestDailySwing(int month) {
-            if (month < 1 || month > 12)
-                return -99999;
+        if (month < 1 || month > 12)
+            return -99999;
 
-            int[] dailyProfit = new int[28];
-            for (int day = 0; day < 28; day++) {
-                int sum = 0;
-                for (int c = 0; c < 5; c++) {
-                    sum += profitData[month-1][day][c];
-                }
-                dailyProfit[day] = sum;
+        int[] dailyProfit = new int[28];
+        for (int day = 0; day < 28; day++) {
+            int sum = 0;
+            for (int c = 0; c < 5; c++) {
+                sum += profitData[month - 1][day][c];
             }
-
-            int maxDiff = 0;
-            for (int i = 1; i < 28; i++) {
-                int diff = Math.abs(dailyProfit[i] - dailyProfit[i-1]);
-                if (diff > maxDiff)
-                    maxDiff = diff;
-            }
-            return maxDiff;
+            dailyProfit[day] = sum;
         }
+
+        int maxDiff = 0;
+        for (int i = 1; i < 28; i++) {
+            int diff = Math.abs(dailyProfit[i] - dailyProfit[i - 1]);
+            if (diff > maxDiff)
+                maxDiff = diff;
+        }
+        return maxDiff;
+    }
 
     public static String compareTwoCommodities(String c1, String c2) {
         int idx1 = -1, idx2 = -1;
@@ -251,9 +251,28 @@ public class Main {
     }
 
     public static String bestWeekOfMonth(int month) {
-        return "DUMMY";
+
+        if (month < 1 || month > 12)
+            return "INVALID_MONTH";
+
+        int[] weekTotals = new int[4];
+        for (int day = 0; day < 28; day++) {
+            int weekIndex = day / 7;
+            for (int c = 0; c < 5; c++) {
+                weekTotals[weekIndex] += profitData[month - 1][day][c];
+            }
+        }
+
+        int greatWeek = 0;
+        for (int i = 1; i < 4; i++) {
+            if (weekTotals[i] > weekTotals[greatWeek])
+                greatWeek = i;
+        }
+        return "Week " + (greatWeek + 1);
     }
 }
+
+
 
 
 
