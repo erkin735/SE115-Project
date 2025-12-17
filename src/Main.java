@@ -194,8 +194,26 @@ public class Main {
     }
 
     public static int biggestDailySwing(int month) {
-        return 1234;
-    }
+            if (month < 1 || month > 12)
+                return -99999;
+
+            int[] dailyProfit = new int[28];
+            for (int day = 0; day < 28; day++) {
+                int sum = 0;
+                for (int c = 0; c < 5; c++) {
+                    sum += profitData[month-1][day][c];
+                }
+                dailyProfit[day] = sum;
+            }
+
+            int maxDiff = 0;
+            for (int i = 1; i < 28; i++) {
+                int diff = Math.abs(dailyProfit[i] - dailyProfit[i-1]);
+                if (diff > maxDiff)
+                    maxDiff = diff;
+            }
+            return maxDiff;
+        }
 
     public static String compareTwoCommodities(String c1, String c2) {
         return "DUMMY is better by 1234";
