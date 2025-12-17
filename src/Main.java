@@ -216,7 +216,38 @@ public class Main {
         }
 
     public static String compareTwoCommodities(String c1, String c2) {
-        return "DUMMY is better by 1234";
+        int idx1 = -1, idx2 = -1;
+
+        if (c1.equals("Gold")) idx1 = 0;
+        else if (c1.equals("Oil")) idx1 = 1;
+        else if (c1.equals("Silver")) idx1 = 2;
+        else if (c1.equals("Wheat")) idx1 = 3;
+        else if (c1.equals("Copper")) idx1 = 4;
+
+        if (c2.equals("Gold")) idx2 = 0;
+        else if (c2.equals("Oil")) idx2 = 1;
+        else if (c2.equals("Silver")) idx2 = 2;
+        else if (c2.equals("Wheat")) idx2 = 3;
+        else if (c2.equals("Copper")) idx2 = 4;
+
+        if (idx1 == -1 || idx2 == -1)
+            return "INVALID_COMMODITY";
+
+//2 Tane Maddeyi Karşılaştırma
+        int total1 = 0;
+        int total2 = 0;
+        for (int m = 0; m < 12; m++) {
+            for (int d = 0; d < 28; d++) {
+                total1 += profitData[m][d][idx1];
+                total2 += profitData[m][d][idx2];
+            }
+        }
+        if (total1 > total2)
+            return "C1 is better by " + (total1 - total2);
+        else if (total2 > total1)
+            return "C2 is better by " + (total2 - total1);
+        else
+            return "Equal";
     }
 
     public static String bestWeekOfMonth(int month) {
