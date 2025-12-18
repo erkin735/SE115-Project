@@ -29,7 +29,7 @@ public class Main {
                     int profit = Integer.parseInt(p[2].trim());
                     int idx = -1;
                     for (int i = 0; i < COMMS; i++) {
-                        if (commodities[i].equalsIgnoreCase(comm)) {
+                        if (commodities[i].equals(comm)) {
                             idx = i;
                             break;
                         }
@@ -83,7 +83,7 @@ public class Main {
 
         int idx = -1;
         for (int i = 0; i < COMMS; i++) {
-            if (commodities[i].equalsIgnoreCase(commodity)) {
+            if (commodities[i].equals(commodity)) {
                 idx = i;
                 break;
             }
@@ -120,7 +120,7 @@ public class Main {
     public static String bestMonthForCommodity(String comm) {
         int idx = -1;
         for (int i = 0; i < COMMS; i++) {
-            if (commodities[i].equalsIgnoreCase(comm)) {
+            if (commodities[i].equals(comm)) {
                 idx = i;
                 break;
             }
@@ -144,7 +144,7 @@ public class Main {
     public static int consecutiveLossDays(String comm) {
         int commIndex = -1;
         for (int i = 0; i < COMMS; i++) {
-            if (commodities[i].equalsIgnoreCase(comm)) {
+            if (commodities[i].equals(comm)) {
                 commIndex = i;
                 break;
             }
@@ -174,7 +174,7 @@ public class Main {
         int commodityIndex = -1;
 
         for (int i = 0; i < COMMS && commodityIndex == -1; i++) {
-            if (commodities[i].equalsIgnoreCase(comm)) {
+            if (commodities[i].equals(comm)) {
                 commodityIndex = i;
             }
         }
@@ -219,17 +219,17 @@ public class Main {
     public static String compareTwoCommodities(String c1, String c2) {
         int idx1 = -1, idx2 = -1;
 
-        if (c1.equalsIgnoreCase("Gold")) idx1 = 0;
-        else if (c1.equalsIgnoreCase("Oil")) idx1 = 1;
-        else if (c1.equalsIgnoreCase("Silver")) idx1 = 2;
-        else if (c1.equalsIgnoreCase("Wheat")) idx1 = 3;
-        else if (c1.equalsIgnoreCase("Copper")) idx1 = 4;
+        if (c1.equals("Gold")) idx1 = 0;
+        else if (c1.equals("Oil")) idx1 = 1;
+        else if (c1.equals("Silver")) idx1 = 2;
+        else if (c1.equals("Wheat")) idx1 = 3;
+        else if (c1.equals("Copper")) idx1 = 4;
 
-        if (c2.equalsIgnoreCase("Gold")) idx2 = 0;
-        else if (c2.equalsIgnoreCase("Oil")) idx2 = 1;
-        else if (c2.equalsIgnoreCase("Silver")) idx2 = 2;
-        else if (c2.equalsIgnoreCase("Wheat")) idx2 = 3;
-        else if (c2.equalsIgnoreCase("Copper")) idx2 = 4;
+        if (c2.equals("Gold")) idx2 = 0;
+        else if (c2.equals("Oil")) idx2 = 1;
+        else if (c2.equals("Silver")) idx2 = 2;
+        else if (c2.equals("Wheat")) idx2 = 3;
+        else if (c2.equals("Copper")) idx2 = 4;
 
         if (idx1 == -1 || idx2 == -1)
             return "INVALID_COMMODITY";
